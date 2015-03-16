@@ -133,7 +133,7 @@ namespace socks5.Socks
                 case StreamTypes.Stream:
                     {
                         int fwd = 4;
-                        string address = "";
+                        StringBuilder address = new StringBuilder();
                         switch ((AddressType)buff[3])
                         {
                             case AddressType.IP:
@@ -141,7 +141,7 @@ namespace socks5.Socks
                                     for (int i = 4; i < 8; i++)
                                     {
                                         //grab IP.
-                                        address += Convert.ToInt32(buff[i]).ToString() + (i != 7 ? "." : "");
+                                        address.Append(Convert.ToInt32(buff[i]).ToString() + (i != 7 ? "." : ""));
                                     }
                                     fwd += 4;
                                 }
@@ -149,7 +149,7 @@ namespace socks5.Socks
                             case AddressType.Domain:
                                 {
                                     int domainlen = Convert.ToInt32(buff[4]);
-                                    address += Encoding.ASCII.GetString(buff, 5, domainlen);
+                                    address.Append(Encoding.ASCII.GetString(buff, 5, domainlen));
                                     fwd += domainlen + 1;
                                 }
                                 break;
@@ -162,7 +162,7 @@ namespace socks5.Socks
                         Int16 x = BitConverter.ToInt16(po, 0);
                         int port = Convert.ToInt32(IPAddress.NetworkToHostOrder(x));
                         port = (port < 1 ? port + 65536 : port);
-                        return new SocksRequest(StreamTypes.Stream, (AddressType)buff[3], address, port);
+                        return new SocksRequest(StreamTypes.Stream, (AddressType)buff[3], address.ToString(), port);
                     }
                 default:
                     //not supported.
