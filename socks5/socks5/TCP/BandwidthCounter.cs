@@ -53,6 +53,14 @@ namespace socks5
                 }
             }
 
+            // *** NOTE TO CHANGE ***     //
+            // THERE IS ANOTHER          //
+            //   "ToString()" METHOD    //
+            //   BEING DEFINED AT THE  //
+            //   BOTTOM !             //
+            //-----------------------//
+            //\/ \/ \/ \/ \/ \/ \/ \//
+
             /// <summary>
             /// Returns the bits per second since the last time this function was called
             /// </summary>
@@ -62,7 +70,7 @@ namespace socks5
                 if (pbytes > 0)
                 {
                     double ret = (double)pbytes + ((double)((double)tbytes / 1024));
-                    ret = ret / (DateTime.Now - lastRead).TotalSeconds;
+                    ret /= (DateTime.Now - lastRead).TotalSeconds;
 
                     lastRead = DateTime.Now;
                     string s = ret.ToString();
@@ -73,7 +81,7 @@ namespace socks5
                 else if (tbytes > 0)
                 {
                     double ret = (double)tbytes + ((double)((double)gbytes / 1024));
-                    ret = ret / (DateTime.Now - lastRead).TotalSeconds;
+                    ret /= (DateTime.Now - lastRead).TotalSeconds;
 
                     lastRead = DateTime.Now;
                     string s = ret.ToString();
@@ -84,7 +92,7 @@ namespace socks5
                 else if (gbytes > 0)
                 {
                     double ret = (double)gbytes + ((double)((double)mbytes / 1024));
-                    ret = ret / (DateTime.Now - lastRead).TotalSeconds;
+                    ret /= (DateTime.Now - lastRead).TotalSeconds;
 
                     lastRead = DateTime.Now;
                     string s = ret.ToString();
@@ -95,7 +103,7 @@ namespace socks5
                 else if (mbytes > 0)
                 {
                     double ret = (double)mbytes + ((double)((double)kbytes / 1024));
-                    ret = ret / (DateTime.Now - lastRead).TotalSeconds;
+                    ret /= (DateTime.Now - lastRead).TotalSeconds;
 
                     lastRead = DateTime.Now;
                     string s = ret.ToString();
@@ -106,7 +114,7 @@ namespace socks5
                 else if (kbytes > 0)
                 {
                     double ret = (double)kbytes + ((double)((double)bytes / 1024));
-                    ret = ret / (DateTime.Now - lastRead).TotalSeconds;
+                    ret /= (DateTime.Now - lastRead).TotalSeconds;
                     lastRead = DateTime.Now;
                     string s = ret.ToString();
                     if (s.Length > 6)
@@ -116,7 +124,7 @@ namespace socks5
                 else
                 {
                     double ret = bytes;
-                    ret = ret / (DateTime.Now - lastRead).TotalSeconds;
+                    ret /= (DateTime.Now - lastRead).TotalSeconds;
                     lastRead = DateTime.Now;
                     string s = ret.ToString();
                     if (s.Length > 6)
